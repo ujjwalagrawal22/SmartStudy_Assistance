@@ -31,3 +31,102 @@ backend/        → API server handling requests
 ai-backend/     → Core AI logic (embeddings, retrieval, generation)  
 .gitignore      
 render.yaml     → Deployment configuration  
+```
+
+## How It Works
+
+**Document Ingestion:** Study material is chunked and embedded into a vector store (e.g., FAISS, ChromaDB).
+
+**Query Processing:** User enters a question through the frontend.
+
+**Retrieval + Generation:** The backend fetches top relevant chunks and uses the LLM to generate a grounded response.
+
+**Response Display:** The generated answer (with optional references) is displayed on the frontend.
+
+## Getting Started
+🧰 Prerequisites
+
+- Python ≥ 3.8
+
+- Node.js (for frontend)
+
+- API key for your chosen LLM (e.g., OpenAI)
+
+- Vector DB (e.g., FAISS, ChromaDB)
+
+## Installation
+1️⃣ Clone the repository
+```text
+git clone https://github.com/ujjwalagrawal22/SmartStudy_Assistance.git
+cd SmartStudy_Assistance
+```
+2️⃣ Setup the AI Backend
+
+```text
+cd ai-backend
+pip install -r requirements.txt
+# configure your .env file with API keys and DB paths
+```
+
+3️⃣ Setup the Backend
+
+```text
+cd ../backend
+pip install -r requirements.txt
+```
+4️⃣ Setup the Frontend
+
+```text
+cd ../frontend
+npm install
+npm start
+```
+
+💡 Usage
+
+- Upload your notes, PDFs, or lecture slides.
+
+- Ask a question — for example:
+
+“Explain SVD and how it’s used in dimensionality reduction.”
+
+- The assistant retrieves relevant sections from your uploaded files.
+
+- You receive a detailed, context-grounded answer with references.
+
+
+## Tech Stack 🧩 
+- Layer	Technology
+- Frontend	React / JavaScript
+- Backend	Python (FastAPI / Flask)
+- AI Engine	LLM via OpenAI / Local model
+- Vector Store	FAISS / ChromaDB
+- Deployment	Render / Docker
+
+ ## License 🧾
+
+- This project is licensed under the MIT License – see the LICENSE
+ file for details.
+
+
+## Acknowledgements
+
+- LangChain -- for retrieval & chain utilities
+
+- OpenAI -- for LLM integration
+
+- ChromaDB/FAISS -- for vector search
+
+** Special thanks to contributors and the open-source community. ** 
+
+## Contributing 🌟 
+
+- Pull requests are welcome!
+- If you find a bug or have an idea for improvement:
+
+    - Fork this repo
+
+    - Create a feature branch
+
+    - Commit and open a PR
+
