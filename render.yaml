@@ -1,0 +1,49 @@
+services:
+  # 1. Node.js Backend API
+  - type: web
+    name: smart-study-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: MONGO_URI
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_PROVIDER
+        value: groq
+      - key: DEFAULT_MODEL
+        value: llama3-8b-8192
+      - key: MAX_TOKENS
+        value: "1024"
+      - key: TEMPERATURE
+        value: "0.7"
+
+  # 2. React Frontend (Static site)
+  - type: web
+    name: smart-study-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/build
+    startCommand: echo "Static site"
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://smart-study-backend.onrender.com
+      - key: REACT_APP_AI_BACKEND_URL
+        value: https://smart-study-ai.onrender.com
+
+  # 3. Python AI Backend
+  - type: web
+    name: smart-study-ai
+    env: python
+    buildCommand: cd ai-backend && pip install -r requirements.txt
+    startCommand: cd ai-backend && python main.py
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: PYTHON_ENV
+        value: production
